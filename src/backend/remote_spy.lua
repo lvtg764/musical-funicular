@@ -136,10 +136,15 @@ function RemoteSpy:HookIncoming()
     scanForRemotes(game)
     
     local connection = game.DescendantAdded:Connect(function(child)
-        if child:IsA("RemoteEvent") then
-            hookRemoteEvent(child)
-        elseif child:IsA("RemoteFunction") then
-            hookRemoteFunction(child)
+        if child and typeof(child) == "Instance" then
+            local success, isRemoteEvent = pcall(function() return child:IsA("RemoteEvent") end)
+            local success2, isRemoteFunction = pcall(function() return child:IsA("RemoteFunction") end)
+            
+            if success and isRemoteEvent then
+                pcall(hookRemoteEvent, child)
+            elseif success2 and isRemoteFunction then
+                pcall(hookRemoteFunction, child)
+            end
         end
     end)
     

@@ -488,8 +488,11 @@ end
 
 function UI:RenderList(tabId)
     for _, child in pairs(self.listScroll:GetChildren()) do
-        if child:IsA("GuiObject") then
-            child:Destroy()
+        if child and typeof(child) == "Instance" then
+            local success, isGuiObject = pcall(function() return child:IsA("GuiObject") end)
+            if success and isGuiObject then
+                pcall(function() child:Destroy() end)
+            end
         end
     end
     
