@@ -1,6 +1,8 @@
+local VERSION = "1.0.7"
 local BASE_URL = "https://raw.githubusercontent.com/lvtg764/musical-funicular/main/"
-local VERSION = "1.0.6"
-local CACHE_BUST = "?v=" .. VERSION
+local TIMESTAMP = tostring(math.floor(tick()))
+local RANDOM = tostring(math.random(100000, 999999))
+local CACHE_BUST = "?v=" .. VERSION .. "&t=" .. TIMESTAMP .. "&r=" .. RANDOM
 
 print("[Cobalt] Starting loader v" .. VERSION)
 
