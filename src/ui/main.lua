@@ -487,7 +487,7 @@ function UI:Add(tabId, item)
 end
 
 function UI:RenderList(tabId)
-    for _, child in ipairs(self.listScroll:GetChildren()) do
+    for _, child in pairs(self.listScroll:GetChildren()) do
         if child:IsA("GuiObject") then
             child:Destroy()
         end
