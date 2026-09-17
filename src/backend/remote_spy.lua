@@ -116,12 +116,19 @@ function RemoteSpy:HookIncoming()
     end
     
     local function scanForRemotes(parent)
-        local descendants = parent:GetDescendants()
+        local success, descendants = pcall(function() return parent:GetDescendants() end)
+        if not success or not descendants then return end
+        
         for _, child in pairs(descendants) do
-            if child:IsA("RemoteEvent") then
-                hookRemoteEvent(child)
-            elseif child:IsA("RemoteFunction") then
-                hookRemoteFunction(child)
+            if child and typeof(child) == "Instance" then
+                local isRemoteEvent = pcall(function() return child:IsA("RemoteEvent") end)
+                local isRemoteFunction = pcall(function() return child:IsA("RemoteFunction") end)
+                
+                if isRemoteEvent then
+                    pcall(hookRemoteEvent, child)
+                elseif isRemoteFunction then
+                    pcall(hookRemoteFunction, child)
+                end
             end
         end
     end
