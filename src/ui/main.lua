@@ -487,12 +487,21 @@ function UI:Add(tabId, item)
 end
 
 function UI:RenderList(tabId)
-    if not self.listScroll then return end
+    if not self.listScroll then 
+        warn("[Cobalt] RenderList called but listScroll is nil")
+        return 
+    end
     
-    for _, child in pairs(self.listScroll:GetChildren()) do
+    local success, children = pcall(function() return self.listScroll:GetChildren() end)
+    if not success then
+        warn("[Cobalt] Failed to get listScroll children:", children)
+        return
+    end
+    
+    for _, child in pairs(children) do
         if child and typeof(child) == "Instance" then
-            local success, isGuiObject = pcall(function() return child:IsA("GuiObject") end)
-            if success and isGuiObject then
+            local ok, isGuiObject = pcall(function() return child:IsA("GuiObject") end)
+            if ok and isGuiObject then
                 pcall(function() child:Destroy() end)
             end
         end
