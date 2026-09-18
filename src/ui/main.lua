@@ -487,6 +487,8 @@ function UI:Add(tabId, item)
 end
 
 function UI:RenderList(tabId)
+    if not self.listScroll then return end
+    
     for _, child in pairs(self.listScroll:GetChildren()) do
         if child and typeof(child) == "Instance" then
             local success, isGuiObject = pcall(function() return child:IsA("GuiObject") end)

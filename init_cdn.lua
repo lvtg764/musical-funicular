@@ -1,4 +1,4 @@
-local VERSION = "1.1.0"
+local VERSION = "1.1.1"
 local BASE_URL = "https://cdn.jsdelivr.net/gh/lvtg764/musical-funicular@main/"
 local TIMESTAMP = tostring(math.floor(tick()))
 local RANDOM = tostring(math.random(100000, 999999))
