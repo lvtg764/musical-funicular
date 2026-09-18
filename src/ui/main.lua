@@ -30,7 +30,8 @@ function UI.new(config)
         Name = "CobaltUI",
         Parent = gethui and gethui() or CoreGui,
         ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-        ResetOnSpawn = false
+        ResetOnSpawn = false,
+        IgnoreGuiInset = true
     })
     
     local main = create("Frame", {

@@ -1,8 +1,8 @@
 local VERSION = "1.1.3"
-local BASE_URL = "https://cdn.jsdelivr.net/gh/lvtg764/musical-funicular@main/"
+local BASE_URL = "https://raw.githubusercontent.com/lvtg764/musical-funicular/main/"
 local TIMESTAMP = tostring(math.floor(tick()))
 local RANDOM = tostring(math.random(100000, 999999))
-local CACHE_BUST = "?v=" .. VERSION .. "&t=" .. TIMESTAMP .. "&r=" .. RANDOM
+local CACHE_BUST = "?nocache=" .. TIMESTAMP .. RANDOM
 
 print("[Cobalt] Starting loader v" .. VERSION)
 
@@ -72,3 +72,4 @@ backend:Start()
 
 print("[Cobalt] Creating UI...")
 local ui = UI.new(backend)
+print("[Cobalt] Ready!")
