@@ -493,9 +493,15 @@ function UI:RenderList(tabId)
         return 
     end
     
+    warn("[Cobalt] listScroll type:", typeof(self.listScroll))
+    warn("[Cobalt] listScroll ClassName:", self.listScroll.ClassName)
+    warn("[Cobalt] GetChildren exists?", self.listScroll.GetChildren ~= nil)
+    
     local success, children = pcall(function() return self.listScroll:GetChildren() end)
     if not success then
         warn("[Cobalt] Failed to get listScroll children:", children)
+        warn("[Cobalt] listScroll.Parent:", self.listScroll.Parent)
+        warn("[Cobalt] listScroll.Name:", self.listScroll.Name)
         return
     end
     
